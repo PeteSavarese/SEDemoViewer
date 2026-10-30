@@ -7,7 +7,8 @@ namespace SEDemoViewer.Core.Models;
 public sealed record DemoHeader
 {
     /// <summary>
-    /// <c>GMODDEMO</c> or <c>HL2DEMO</c>
+    /// Gets text identifying the file format of Source games demo
+    /// like <c>GMODDEMO</c> or <c>HL2DEMO</c>.
     /// </summary>
     public required string Stamp { get; init; }
     
@@ -39,17 +40,17 @@ public sealed record DemoHeader
     public required string GameDirectory { get; init; }
     
     /// <summary>
-    /// Length of demo in seocnds.
+    /// Length of demo in seconds.
     /// </summary>
     public float PlaybackTime { get; init; } 
     
     /// <summary>
-    /// Gets total amount of ticks captured in demo.
+    /// Gets total number of ticks captured in demo.
     /// </summary>
     public int Ticks { get; init; }
     
     /// <summary>
-    /// Gets total amount of frames captured in demo.
+    /// Gets total number of frames captured in demo.
     /// </summary>
     public int Frames { get; init; }
     
@@ -58,7 +59,12 @@ public sealed record DemoHeader
     /// </summary>
     public int SignonLength { get; init; }
     
-
+    /// <summary>
+    /// Gets the server tick rate in ticks per second, or 0 when
+    /// <see cref="PlaybackTime"/> is 0.
+    /// </summary>
     public double TickRate => PlaybackTime > 0 ? Ticks / PlaybackTime : 0;
+    
+    /// <summary>Gets <see cref="PlaybackTime"/> as a <see cref="TimeSpan"/>.</summary>
     public TimeSpan Duration => TimeSpan.FromSeconds(PlaybackTime);
 }
