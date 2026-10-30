@@ -2,7 +2,7 @@ namespace SEDemoViewer.Core.Models;
 
 /// <summary>
 /// Represents the fixed 1072-byte header at the start of every
-/// Source/GMod demo.
+/// Source Engine file header.
 /// </summary>
 public sealed class DemoHeader
 {
@@ -21,10 +21,19 @@ public sealed class DemoHeader
     /// </summary>
     public int NetworkProtocol { get; init; }
     
+    /// <summary>
+    /// Gets server that recorded demo.
+    /// </summary>
     public required string ServerName { get; init; }
     
+    /// <summary>
+    /// Gets client that recorded demo.
+    /// </summary>
     public required string ClientName { get; init; }
     
+    /// <summary>
+    /// Gets map name that demo was recorded on.
+    /// </summary>
     public required string MapName { get; init; }
     
     public required string GameDirectory { get; init; }
