@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AvaloniaProject">
+    <option name="projectPerEditor">
+      <map>
+        <entry key="SEDemoViewer/App.axaml" value="SEDemoViewer/SEDemoViewer.csproj" />
+        <entry key="SEDemoViewer/MainWindow.axaml" value="SEDemoViewer/SEDemoViewer.csproj" />
+        <entry key="SEDemoViewer/Styles/AppDefaultStyles.axaml" value="SEDemoViewer/SEDemoViewer.csproj" />
+      </map>
+    </option>
+  </component>
+</project>

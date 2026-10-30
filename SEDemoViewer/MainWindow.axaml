@@ -1,0 +1,60 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:chrome="using:Avalonia.Controls.Chrome"
+        mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="350"
+        x:Class="SEDemoViewer.MainWindow"
+        Title="SEDemoViewer"
+        WindowDecorations="BorderOnly"
+        ExtendClientAreaToDecorationsHint="True">
+
+	<Window.Styles>
+		<Style Selector="chrome|WindowDrawnDecorations /template/ Border#PART_WindowBorder">
+			<Setter Property="BorderThickness" Value="0"/>
+			<Setter Property="Background" Value="Transparent"/>
+		</Style>
+	</Window.Styles>
+
+	<Grid RowDefinitions="Auto, *" Background="{DynamicResource PrimaryBackground}">
+		<Grid Grid.Row="0" Height="32" ColumnDefinitions="*, Auto"
+		      Background="{DynamicResource SurfacePanel}"
+		      PointerPressed="TitleBar_PointerPressed"
+		      DoubleTapped="TitleBar_DoubleTapped">
+			<TextBlock Grid.Column="0" Text="SEDemoViewer"
+			           VerticalAlignment="Center" Margin="12,0"
+			           IsHitTestVisible="False"/>
+			<StackPanel Grid.Column="1" Orientation="Horizontal">
+				<Button Content="—" Click="MinimizeButton_Click" Width="46" Background="Transparent"/>
+				<Button Content="▢" Click="MaximizeButton_Click" Width="46" Background="Transparent"/>
+				<Button Content="✕" Click="CloseButton_Click" Width="46" Background="Transparent"/>
+			</StackPanel>
+		</Grid>
+
+		<Grid Grid.Row="1" ColumnDefinitions="200, *">
+			<Border Padding="20" Background="{DynamicResource SurfacePanel}">
+				<Grid RowDefinitions="*, Auto">
+					<StackPanel>
+						<TextBlock Text="Library"/>
+						<Button Content="All demos" Foreground="white" Background="Transparent" HorizontalAlignment="Stretch" />
+						<Button Content="Favorites" Foreground="white" Background="Transparent" HorizontalAlignment="Stretch" />
+						
+						<TextBlock Text="Manage"/>
+						<Button Content="Auto-rename" Foreground="white" Background="Transparent" HorizontalAlignment="Stretch" />
+						
+						<TextBlock Text="Sources"/>
+						<Button Content="Server 1" Foreground="white" Background="Transparent" HorizontalAlignment="Stretch" />
+						<Button Content="Server 2" Foreground="white" Background="Transparent" HorizontalAlignment="Stretch" />
+					</StackPanel>
+				</Grid>
+			</Border>
+
+			<Border Grid.Column="1" Background="{DynamicResource PrimaryBackground}">
+				<Button Content="Open file"
+				        HorizontalAlignment="Center"
+				        VerticalAlignment="Center"
+				        Click="OpenDemoButton_Click"/>
+			</Border>
+		</Grid>
+	</Grid>
+</Window>

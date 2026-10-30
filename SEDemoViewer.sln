@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SEDemoViewer", "SEDemoViewer\SEDemoViewer.csproj", "{878C71F2-32DB-4160-A950-973B2212BF31}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SEDemoViewer.Core", "SEDemoViewer.Core\SEDemoViewer.Core.csproj", "{63420469-51D7-4EA3-8351-61C0766EA487}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{878C71F2-32DB-4160-A950-973B2212BF31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{878C71F2-32DB-4160-A950-973B2212BF31}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{878C71F2-32DB-4160-A950-973B2212BF31}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{878C71F2-32DB-4160-A950-973B2212BF31}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63420469-51D7-4EA3-8351-61C0766EA487}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63420469-51D7-4EA3-8351-61C0766EA487}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63420469-51D7-4EA3-8351-61C0766EA487}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63420469-51D7-4EA3-8351-61C0766EA487}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

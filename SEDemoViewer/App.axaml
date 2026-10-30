@@ -1,0 +1,15 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="SEDemoViewer.App"
+             RequestedThemeVariant="Default">
+
+	<Application.Styles>
+		<FluentTheme />
+		<StyleInclude Source="Styles/AppDefaultStyles.axaml" />
+	</Application.Styles>
+
+	<Application.Resources>
+		<SolidColorBrush x:Key="PrimaryBackground">#0b0d12</SolidColorBrush>
+		<SolidColorBrush x:Key="SurfacePanel">#0e1117</SolidColorBrush>
+	</Application.Resources>
+</Application>
