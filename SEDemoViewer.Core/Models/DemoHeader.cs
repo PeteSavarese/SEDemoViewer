@@ -4,7 +4,7 @@ namespace SEDemoViewer.Core.Models;
 /// Represents the fixed 1072-byte header at the start of every
 /// Source Engine file header.
 /// </summary>
-public sealed class DemoHeader
+public sealed record DemoHeader
 {
     /// <summary>
     /// <c>GMODDEMO</c> or <c>HL2DEMO</c>
