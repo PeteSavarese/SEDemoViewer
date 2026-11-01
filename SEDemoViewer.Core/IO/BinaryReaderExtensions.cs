@@ -16,9 +16,6 @@ public static class BinaryReaderExtensions
     {
         ArgumentNullException.ThrowIfNull(reader);
         ArgumentOutOfRangeException.ThrowIfLessThan(size, 1);
-        
-        var stringBuilder = new StringBuilder();
-        char currentChar;
 
         var bytes = reader.ReadBytes(size);
         if (bytes.Length < size)
