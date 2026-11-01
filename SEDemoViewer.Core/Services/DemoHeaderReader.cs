@@ -3,14 +3,17 @@ using SEDemoViewer.Core.Models;
 
 namespace SEDemoViewer.Core.Services;
 
-public static class DemoHeaderReader
+public class DemoHeaderReader : IDemoHeaderReader
 {
     private const string GmodDemoHeader = "GMODEMO";
     
-    public static DemoHeader? ReadDemoFile(BinaryReader reader)
+    public DemoHeader Read(string path)
     {
-        var headerStamp = BinaryReaderExtensions.ReadNullTerminatedString(reader);
+        throw new NotImplementedException();
+    }
 
-        return null;
+    public DemoHeader Read(Stream stream)
+    {
+        throw new NotImplementedException();
     }
 }
