@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="SEDemoViewer.Core.Tests/SEDemoViewer.Core.Tests.csproj" />
+  <Project Path="SEDemoViewer.Core/SEDemoViewer.Core.csproj" />
+  <Project Path="SEDemoViewer/SEDemoViewer.csproj" />
+</Solution>
