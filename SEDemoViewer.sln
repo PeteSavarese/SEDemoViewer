@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SEDemoViewer", "SEDemoViewe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SEDemoViewer.Core", "SEDemoViewer.Core\SEDemoViewer.Core.csproj", "{63420469-51D7-4EA3-8351-61C0766EA487}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SEDemoViewer.Core.Tests", "SEDemoViewer.Core.Tests\SEDemoViewer.Core.Tests.csproj", "{C2DD334D-5981-4451-868D-CA5FECD7567C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{63420469-51D7-4EA3-8351-61C0766EA487}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{63420469-51D7-4EA3-8351-61C0766EA487}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{63420469-51D7-4EA3-8351-61C0766EA487}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2DD334D-5981-4451-868D-CA5FECD7567C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2DD334D-5981-4451-868D-CA5FECD7567C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2DD334D-5981-4451-868D-CA5FECD7567C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2DD334D-5981-4451-868D-CA5FECD7567C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
