@@ -2,6 +2,7 @@ using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Platform.Storage;
+using SEDemoViewer.ViewModels;
 
 namespace SEDemoViewer;
 
@@ -12,39 +13,39 @@ public partial class MainWindow : Window
         InitializeComponent();
     }
 
+    private MainWindowViewModel ViewModel => (MainWindowViewModel)DataContext!;
+
     private void TitleBar_PointerPressed(object? sender, PointerPressedEventArgs e)
     {
         if (e.GetCurrentPoint(this).Properties.IsLeftButtonPressed)
             BeginMoveDrag(e);
     }
-    
+
     #region Menu Bar buttons
     private void TitleBar_DoubleTapped(object? sender, RoutedEventArgs e) => ToggleMaximize();
-    
+
     private void MinimizeButton_Click(object? sender, RoutedEventArgs e) => WindowState = WindowState.Minimized;
-    
+
     private void MaximizeButton_Click(object? sender, RoutedEventArgs e) => ToggleMaximize();
-    
+
     private void CloseButton_Click(object? sender, RoutedEventArgs e) => Close();
     #endregion
 
-    private async void OpenDemoButton_Click(object? sender, RoutedEventArgs e)
+    private async void ChooseFolderButton_Click(object? sender, RoutedEventArgs e)
     {
-        var topLevel = TopLevel.GetTopLevel(this);
-        var files = await topLevel.StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
+        var folders = await StorageProvider.OpenFolderPickerAsync(new FolderPickerOpenOptions
         {
-            Title = "Open demo file",
+            Title = "Open Garry's Mod folder",
             AllowMultiple = false,
-            FileTypeFilter = [new FilePickerFileType("Source demos") { Patterns = ["*.dem"] }]
         });
 
-        if (files.Count < 1)
+        if (folders.Count < 1 || folders[0].TryGetLocalPath() is not { } path)
             return;
 
-        // Replaced by the Demoreel library UI, which reads demos through IDemoHeaderReader.
+        await ViewModel.LoadFolderAsync(path);
     }
-    
-    private void ToggleMaximize() => WindowState = WindowState == WindowState.Maximized 
-        ? WindowState.Normal 
+
+    private void ToggleMaximize() => WindowState = WindowState == WindowState.Maximized
+        ? WindowState.Normal
         : WindowState.Maximized;
 }

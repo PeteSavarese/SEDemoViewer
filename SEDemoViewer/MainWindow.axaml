@@ -3,9 +3,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:chrome="using:Avalonia.Controls.Chrome"
-        mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="350"
+        xmlns:vm="using:SEDemoViewer.ViewModels"
+        mc:Ignorable="d" d:DesignWidth="1100" d:DesignHeight="650"
         x:Class="SEDemoViewer.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
         Title="SEDemoViewer"
+        Width="1100" Height="650"
         WindowDecorations="BorderOnly"
         ExtendClientAreaToDecorationsHint="True">
 
@@ -14,9 +17,19 @@
 			<Setter Property="BorderThickness" Value="0"/>
 			<Setter Property="Background" Value="Transparent"/>
 		</Style>
+		<Style Selector="TextBlock.label">
+			<Setter Property="FontSize" Value="11"/>
+			<Setter Property="Foreground" Value="{DynamicResource TextMuted}"/>
+			<Setter Property="Margin" Value="0,0,0,6"/>
+		</Style>
+		<Style Selector="TextBlock.muted">
+			<Setter Property="Foreground" Value="{DynamicResource TextMuted}"/>
+		</Style>
 	</Window.Styles>
 
 	<Grid RowDefinitions="Auto, *" Background="{DynamicResource PrimaryBackground}">
+
+		<!-- Title bar -->
 		<Grid Grid.Row="0" Height="32" ColumnDefinitions="*, Auto"
 		      Background="{DynamicResource SurfacePanel}"
 		      PointerPressed="TitleBar_PointerPressed"
@@ -31,30 +44,65 @@
 			</StackPanel>
 		</Grid>
 
-		<Grid Grid.Row="1" ColumnDefinitions="200, *">
-			<Border Padding="20" Background="{DynamicResource SurfacePanel}">
-				<Grid RowDefinitions="*, Auto">
+		<Grid Grid.Row="1" ColumnDefinitions="220, *">
+
+			<!-- Sidebar -->
+			<Border Grid.Column="0" Padding="16" Background="{DynamicResource SurfacePanel}">
+				<StackPanel Spacing="20">
 					<StackPanel>
-						<TextBlock Text="Library"/>
-						<Button Content="All demos" Foreground="white" Background="Transparent" HorizontalAlignment="Stretch" />
-						<Button Content="Favorites" Foreground="white" Background="Transparent" HorizontalAlignment="Stretch" />
-						
-						<TextBlock Text="Manage"/>
-						<Button Content="Auto-rename" Foreground="white" Background="Transparent" HorizontalAlignment="Stretch" />
-						
-						<TextBlock Text="Sources"/>
-						<Button Content="Server 1" Foreground="white" Background="Transparent" HorizontalAlignment="Stretch" />
-						<Button Content="Server 2" Foreground="white" Background="Transparent" HorizontalAlignment="Stretch" />
+						<TextBlock Classes="label" Text="LIBRARY"/>
+						<Grid ColumnDefinitions="*, Auto">
+							<TextBlock Text="All demos"/>
+							<TextBlock Grid.Column="1" Classes="muted" Text="{Binding Demos.Count}"/>
+						</Grid>
 					</StackPanel>
-				</Grid>
+
+					<StackPanel>
+						<TextBlock Classes="label" Text="SOURCE"/>
+						<TextBlock Classes="muted" FontSize="12" TextWrapping="Wrap" Margin="0,0,0,8"
+						           Text="{Binding FolderPath, TargetNullValue='No folder chosen'}"/>
+						<Button Content="Choose folder…" HorizontalAlignment="Stretch"
+						        HorizontalContentAlignment="Center"
+						        IsEnabled="{Binding !IsScanning}"
+						        Click="ChooseFolderButton_Click"/>
+					</StackPanel>
+				</StackPanel>
 			</Border>
 
-			<Border Grid.Column="1" Background="{DynamicResource PrimaryBackground}">
-				<Button Content="Open file"
-				        HorizontalAlignment="Center"
-				        VerticalAlignment="Center"
-				        Click="OpenDemoButton_Click"/>
-			</Border>
+			<!-- Demo list -->
+			<Grid Grid.Column="1" RowDefinitions="Auto, *, Auto">
+				<Grid Grid.Row="0" Margin="16,12,16,6"
+				      ColumnDefinitions="*, 170, 170, 130, 70, 130">
+					<TextBlock Grid.Column="0" Classes="label" Text="DEMO"/>
+					<TextBlock Grid.Column="1" Classes="label" Text="MAP"/>
+					<TextBlock Grid.Column="2" Classes="label" Text="SERVER"/>
+					<TextBlock Grid.Column="3" Classes="label" Text="RECORDER"/>
+					<TextBlock Grid.Column="4" Classes="label" Text="LENGTH"/>
+					<TextBlock Grid.Column="5" Classes="label" Text="RECORDED"/>
+				</Grid>
+
+				<ListBox Grid.Row="1" ItemsSource="{Binding Demos}" Background="Transparent">
+					<ListBox.ItemTemplate>
+						<DataTemplate x:DataType="vm:DemoItemViewModel">
+							<Grid ColumnDefinitions="*, 170, 170, 130, 70, 130">
+								<StackPanel Grid.Column="0" Margin="0,0,12,0">
+									<TextBlock Text="{Binding Name}" TextTrimming="CharacterEllipsis"/>
+									<TextBlock Classes="muted" FontSize="11" Text="{Binding Error}"
+									           IsVisible="{Binding Error, Converter={x:Static ObjectConverters.IsNotNull}}"
+									           TextTrimming="CharacterEllipsis"/>
+								</StackPanel>
+								<TextBlock Grid.Column="1" Text="{Binding Map}" TextTrimming="CharacterEllipsis" Margin="0,0,12,0"/>
+								<TextBlock Grid.Column="2" Text="{Binding Server}" TextTrimming="CharacterEllipsis" Margin="0,0,12,0"/>
+								<TextBlock Grid.Column="3" Text="{Binding Recorder}" TextTrimming="CharacterEllipsis" Margin="0,0,12,0"/>
+								<TextBlock Grid.Column="4" Text="{Binding Length}"/>
+								<TextBlock Grid.Column="5" Classes="muted" Text="{Binding Recorded}"/>
+							</Grid>
+						</DataTemplate>
+					</ListBox.ItemTemplate>
+				</ListBox>
+
+				<TextBlock Grid.Row="2" Classes="muted" Margin="16,8" Text="{Binding StatusText}"/>
+			</Grid>
 		</Grid>
 	</Grid>
 </Window>
