@@ -40,7 +40,7 @@ public sealed class DemoScanner(IDemoHeaderReader reader) : IDemoScanner
             {
                 header = reader.Read(filePath);
             }
-            catch (Exception ex) when (ex is DemoParseException or IOException)
+            catch (Exception ex) when (ex is DemoParseException or IOException or UnauthorizedAccessException)
             {
                 error = ex.Message;
             }
