@@ -4,11 +4,11 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
-using SEDemoViewer.Services;
+using SEDemoViewer.Core.Services;
 
 namespace SEDemoViewer.ViewModels;
 
-public sealed partial class MainWindowViewModel(FakeDemoScanner scanner) : ObservableObject
+public sealed partial class MainWindowViewModel(IDemoScanner scanner) : ObservableObject
 {
     public ObservableCollection<DemoItemViewModel> Demos { get; } = [];
 
@@ -31,7 +31,7 @@ public sealed partial class MainWindowViewModel(FakeDemoScanner scanner) : Obser
         try
         {
             // Keep IO off the UI thread so window doesnt freeze
-            var demos = await Task.Run(() => scanner.Scan([folder], CancellationToken.None));
+            var demos = await Task.Run(() => scanner.Scan([folder], progress: null, CancellationToken.None));
 
             Demos.Clear();
             foreach (var demo in demos.OrderByDescending(d => d.RecordedUtc))
