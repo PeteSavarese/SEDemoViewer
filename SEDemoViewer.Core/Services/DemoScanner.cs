@@ -26,13 +26,13 @@ public sealed class DemoScanner(IDemoHeaderReader reader) : IDemoScanner
             .ToList();
 
         var demoList = new List<Demo>();
-        string? error = null;
         
         foreach (var filePath in files)
         {
             ct.ThrowIfCancellationRequested();
             
             var fileInfo = new FileInfo(filePath);
+            string? error = null;
 
             DemoHeader? header = null;
 
