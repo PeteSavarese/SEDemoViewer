@@ -55,6 +55,8 @@ public sealed class DemoScanner(IDemoHeaderReader reader) : IDemoScanner
                 Header = header,
                 ParseError = error
             });
+            
+            progress?.Report(new ScanProgress(demoList.Count, files.Count));
         }
 
         return demoList;
