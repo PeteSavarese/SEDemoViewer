@@ -22,4 +22,9 @@
       <ProjectReference Include="..\SEDemoViewer.Core\SEDemoViewer.Core.csproj" />
     </ItemGroup>
 
+    <!-- Include Test Demo Files for CI Tests -->
+    <ItemGroup>
+        <None Include="TestData\**" CopyToOutputDirectory="PreserveNewest" />
+    </ItemGroup>
+
 </Project>
