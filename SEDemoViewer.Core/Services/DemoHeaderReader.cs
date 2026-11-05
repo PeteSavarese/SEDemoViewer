@@ -35,7 +35,7 @@ public class DemoHeaderReader : IDemoHeaderReader
             if (!stamp.Equals(GmodDemoHeader, StringComparison.InvariantCultureIgnoreCase)
                 && !stamp.Equals(Hl2DemoHeader, StringComparison.InvariantCultureIgnoreCase))
             {
-                throw new DemoParseException("Invalid demo header");
+                throw new DemoParseException($"Demo header '{stamp}' is invalid.");
             }
 
             return new DemoHeader
