@@ -52,9 +52,9 @@ public class DemoHeaderReader : IDemoHeaderReader
                 Frames = binaryReader.ReadInt32(),
                 SignonLength = binaryReader.ReadInt32()
             };
-        } catch (EndOfStreamException)
+        } catch (EndOfStreamException ex)
         {
-            throw new DemoParseException($"File is shorted than demo header ({HeaderSize} bytes).");
+            throw new DemoParseException($"File is shorter than demo header ({HeaderSize} bytes).", ex);
         }
     }
 }
