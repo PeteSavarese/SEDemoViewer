@@ -1,3 +1,4 @@
+using System.Text;
 using SEDemoViewer.Core.IO;
 using SEDemoViewer.Core.Models;
 
@@ -26,7 +27,14 @@ public class DemoHeaderReader : IDemoHeaderReader
     {
         ArgumentNullException.ThrowIfNull(stream);
         
-        using var binaryReader = new BinaryReader(stream);
+        // Using Latin-1 only affects BinaryReader's char methods (ReadChar, ReadChars, and ReadString) which we
+        // don't use since header strings are read as raw bytes and decoded as UTF-8 by ReadNullTerminatedString.
+        // Latin-1 is chosen because it maps exactly 1 byte to 1 char. Just in case in the future, for example, a
+        // ReadChars(260) will always consume 260 bytes, whereas UTF-8 could consume more and shift every subsequent read.
+        //
+        // leaveOpen is also set to true since the stream belongs to the caller so we don't want the disposal of BinaryReader
+        // to also close the stream.
+        using var binaryReader = new BinaryReader(stream, Encoding.Latin1, true);
 
         try
         {
