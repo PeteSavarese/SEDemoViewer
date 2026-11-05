@@ -1,0 +1,2 @@
+# Demo files are binary... never convert line endings or diff them as text
+*.dem binary
