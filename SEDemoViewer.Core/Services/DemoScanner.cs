@@ -26,12 +26,22 @@ public sealed class DemoScanner(IDemoHeaderReader reader) : IDemoScanner
             .ToList();
 
         var demoList = new List<Demo>();
-        
+        var processed = 0;
+
         foreach (var filePath in files)
         {
             ct.ThrowIfCancellationRequested();
-            
+            processed++;
+
+            // File may have been deleted or moved since it was listed. Skip it rather than letting
+            // FileInfo.Length throw and fail the entire scan
             var fileInfo = new FileInfo(filePath);
+            if (!fileInfo.Exists)
+            {
+                progress?.Report(new ScanProgress(processed, files.Count));
+                continue;
+            }
+
             string? error = null;
 
             DemoHeader? header = null;
@@ -56,7 +66,7 @@ public sealed class DemoScanner(IDemoHeaderReader reader) : IDemoScanner
                 ParseError = error
             });
             
-            progress?.Report(new ScanProgress(demoList.Count, files.Count));
+            progress?.Report(new ScanProgress(processed, files.Count));
         }
 
         return demoList;
