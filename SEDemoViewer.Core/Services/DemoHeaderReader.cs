@@ -20,7 +20,9 @@ public class DemoHeaderReader : IDemoHeaderReader
     
     public DemoHeader Read(string path)
     {
-        return Read(File.OpenRead(path));
+        using var stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite | FileShare.Delete);
+        
+        return Read(stream);
     }
 
     public DemoHeader Read(Stream stream)
